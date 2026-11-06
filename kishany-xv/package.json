@@ -1,0 +1,15 @@
+{
+  "name": "kishany-xv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Invitación digital interactiva · Kishany Florez · Mis 15 Años · El Bosque de un Renacer",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "dev:api": "npx --yes vercel dev",
+    "check": "node --check src/js/main.js && node --check api/rsvp.js && node --check api/songs.js && node --check api/admin.js"
+  },
+  "engines": { "node": ">=20" },
+  "author": "Yosimar Zuñiga · LA MOVIE AGENCY S.A.S.",
+  "license": "UNLICENSED"
+}

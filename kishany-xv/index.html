@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kishany · Mis 15 Años</title>
+<meta name="description" content="Estás invitado a los XV años de Kishany Florez · El Bosque de un Renacer · 21 de noviembre de 2026, Cartagena.">
+<meta name="theme-color" content="#F5E6E8">
+<meta property="og:title" content="Kishany Florez · Mis 15 Años">
+<meta property="og:description" content="El Bosque de un Renacer · Sábado 21 de noviembre de 2026 · 7:00 p. m.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/assets/branding/og-image.jpg">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="assets/branding/favicon_k.png">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/files/cormorant-garamond-latin-500-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/files/jost-latin-500-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="src/styles/global.css">
+</head>
+<body>
+<!-- @@BODY_START -->
+<div class="stage">
+<div class="device" id="device">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="fallbackBg" hidden></div>
+  <div id="veil"></div>
+
+  <div id="loader"><div>
+    <svg class="heart" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 28S3 20 3 11a7 7 0 0113-3 7 7 0 0113 3c0 9-13 17-13 17z"/></svg>
+    <p>Preparando la magia</p></div></div>
+  <div id="curtain"></div>
+  <div id="flash"></div>
+
+  <div id="intro">
+    <div class="intro-crest" id="introCrest">Kishany · XV</div>
+    <p class="tagline" id="tagline">«Hay historias que comienzan con una transformación...»</p>
+    <button id="enterBtn" class="btn-magic" type="button" disabled>Descubrir la magia
+      <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 6l6 6-6 6M12 6l6 6-6 6"/></svg></span>
+    </button>
+  </div>
+
+  <main id="content" tabindex="-1" aria-label="Invitación de XV años de Kishany Florez">
+    <section id="hero">
+      <div class="seal-slot rv" id="heroSeal" aria-label="Sello de Kishany Florez"></div>
+      <p class="eyebrow rv">Mis 15 años</p>
+      <h1 class="name rv"><span class="n1">KISHANY</span><span class="n2">FLOREZ</span></h1>
+      <svg class="divider rv" viewBox="0 0 180 14" fill="none" stroke="currentColor" stroke-width=".8" aria-hidden="true" style="margin-top:20px"><path d="M0 7h68M112 7h68"/><path d="M90 12.5S80 7 80 3.6a3.4 3.4 0 016.5-1.4L90 5l3.5-2.8A3.4 3.4 0 01100 3.6C100 7 90 12.5 90 12.5z" fill="currentColor" fill-opacity=".25"/><circle cx="73" cy="7" r="1.3" fill="currentColor"/><circle cx="107" cy="7" r="1.3" fill="currentColor"/></svg>
+      <p class="script rv">El Bosque de un Renacer</p>
+      <p class="hero-date rv" id="heroDate"></p>
+      <div class="scroll-hint"><span>Desliza</span><i></i></div>
+    </section>
+
+    <section id="mensaje">
+      <svg class="css-fly" id="flyMsg" viewBox="0 0 42 34" aria-hidden="true"><g class="w"><path d="M21 17C15 4 4 2 3 9c-1 6 8 9 18 8zM21 17c-8 2-14 6-11 12 3 4 9-3 11-12z" fill="#F5E6E8" stroke="#C6A46B" stroke-width=".8"/><path d="M21 17C27 4 38 2 39 9c1 6-8 9-18 8zM21 17c8 2 14 6 11 12-3 4-9-3-11-12z" fill="#F5E6E8" stroke="#C6A46B" stroke-width=".8"/></g><path d="M21 10v15" stroke="#8a5a66" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <p class="eyebrow rv">Un nuevo capítulo</p>
+      <div class="msg card framed rv">
+        <p class="rv" data-fly>«Hoy, con el corazón lleno de gratitud hacia Dios, comienzo a escribir un nuevo capítulo de mi vida: mi renacimiento.</p>
+        <p class="rv" data-fly>Mis 15 años representan mucho más que una edad; son el comienzo de una nueva etapa llena de sueños, bendiciones y propósitos.</p>
+        <p class="rv accent" data-fly>Y esto... es apenas el comienzo.</p>
+        <p class="rv close">Prepárense para descubrir la magia de un renacer»</p>
+      </div>
+    </section>
+
+    <section id="evento">
+      <p class="eyebrow rv">La celebración</p>
+      <h2 class="rv">Una noche <em>encantada</em></h2>
+      <div class="sep rv" aria-hidden="true">
+        <svg viewBox="0 0 120 10" fill="none" stroke="currentColor" stroke-width=".8"><path d="M2 5h100"/><path d="M110 2.5l2.5 2.5-2.5 2.5-2.5-2.5z" fill="currentColor" stroke="none"/><circle cx="104" cy="5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span class="sep-seal" id="sepSeal"></span>
+        <svg viewBox="0 0 120 10" fill="none" stroke="currentColor" stroke-width=".8"><path d="M18 5h100"/><path d="M10 2.5L12.5 5 10 7.5 7.5 5z" fill="currentColor" stroke="none"/><circle cx="16" cy="5" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="grid">
+        <div class="card tile wide rv">
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1"><rect x="4" y="6" width="20" height="18" rx="2"/><path d="M4 11h20M9 3v5M19 3v5"/><path d="M14 15.5c-1.2-1.6-3.6-.8-3 1 .5 1.5 3 3 3 3s2.5-1.5 3-3c.6-1.8-1.8-2.6-3-1z"/></svg>
+          <span class="k">Fecha</span><span class="v" id="evDate"></span>
+        </div>
+        <div class="card tile rv">
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 3"/></svg>
+          <span class="k">Hora</span><span class="v" id="evTime"></span>
+        </div>
+        <div class="card tile rv">
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 24V12a8 8 0 0116 0v12"/><path d="M3 24h22M10 24v-8h8v8"/></svg>
+          <span class="k">Salón</span><span class="v" id="evRoom"></span>
+        </div>
+        <div class="card tile wide rv">
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 25s8-7.5 8-14a8 8 0 10-16 0c0 6.5 8 14 8 14z"/><circle cx="14" cy="11" r="3"/></svg>
+          <span class="k">Lugar</span><span class="v" id="evVenue"></span>
+        </div>
+        <div class="card tile wide framed rv">
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 23s-9-5.5-9-12a5 5 0 019-3 5 5 0 019 3c0 6.5-9 12-9 12z"/></svg>
+          <span class="k">Con la bendición de mis padres</span>
+          <div class="parents v" id="evParents"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cuenta">
+      <p class="eyebrow rv">Falta muy poco</p>
+      <h2 class="rv">Contando los días <em>contigo</em></h2>
+      <div class="count rv" id="countGrid">
+        <div class="card unit"><div class="digits" id="cd-d"><span>00</span></div><span class="k">Días</span></div>
+        <div class="card unit"><div class="digits" id="cd-h"><span>00</span></div><span class="k">Horas</span></div>
+        <div class="card unit"><div class="digits" id="cd-m"><span>00</span></div><span class="k">Minutos</span></div>
+        <div class="card unit"><div class="digits" id="cd-s"><span>00</span></div><span class="k">Segundos</span></div>
+      </div>
+      <p class="count-msg" id="countMsg" hidden></p>
+      <div class="card calendar-box framed rv">
+        <span class="k">Guarda la fecha</span>
+        <div class="btn-row">
+          <a class="btn" id="gcalBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>Google</a>
+          <button class="btn soft" type="button" id="icsBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>iPhone / Outlook</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="vestuario">
+      <p class="eyebrow rv">Código de vestuario</p>
+      <h2 class="rv">Etiqueta <em>de gala</em></h2>
+      <div class="grid dress">
+        <div class="card tile rv">
+          <svg viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="1"><path d="M24 4c0 6 2 9 6 9s6-3 6-9"/><path d="M24 4l-4 16c4 4 16 4 20 0L36 4"/><path d="M20 20c-2 10 2 14 4 18-6 18-14 40-18 58h48c-4-18-12-40-18-58 2-4 6-8 4-18"/><path d="M24 38c4 2 8 2 12 0" opacity=".6"/><path d="M18 70c6 4 18 4 24 0M12 88c10 4 26 4 36 0" opacity=".45"/></svg>
+          <span class="t">Damas</span><span class="d">Vestido elegante largo</span>
+        </div>
+        <div class="card tile rv">
+          <svg viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="1"><path d="M22 6l8 6 8-6"/><path d="M22 6L10 14l-2 82h44l-2-82-12-8"/><path d="M22 6l4 30 4-18 4 18 4-30"/><path d="M26 13l4 3 4-3-4 3z" fill="currentColor"/><circle cx="30" cy="46" r="1.2" fill="currentColor"/><circle cx="30" cy="56" r="1.2" fill="currentColor"/><path d="M30 36v60" opacity=".5"/></svg>
+          <span class="t">Caballeros</span><span class="d">Smoking negro</span>
+        </div>
+      </div>
+      <div class="card reserved framed rv">
+        <span class="k">Colores reservados para la celebración</span>
+        <div class="swatches">
+          <span class="sw"><b style="background:#D9AEB7"></b>Rosa</span>
+          <span class="sw"><b style="background:#617B61"></b>Verde</span>
+          <span class="sw"><b style="background:#C6A46B"></b>Dorado</span>
+          <span class="sw"><b style="background:#C9C6C7"></b>Plateado</span>
+          <span class="sw"><b style="background:#672F45"></b>Vino</span>
+        </div>
+        <p>«Reservamos para nuestra celebración los colores rosa, verde, dorado, plateado y vino. Agradecemos elegir otros tonos para acompañarnos en esta noche especial».</p>
+      </div>
+    </section>
+
+    <section id="sobres">
+      <p class="eyebrow rv">Lluvia de sobres</p>
+      <h2 class="rv">Un detalle <em>de cariño</em></h2>
+      <p class="lead rv">«Tu presencia será nuestro mejor regalo. Si deseas tener un detalle especial, tendremos lluvia de sobres».</p>
+      <button class="env-wrap rv" id="envBtn" type="button" aria-label="Abrir el sobre" aria-expanded="false" aria-controls="letter">
+        <div class="envelope" id="envelope">
+          <div class="letter" id="letter">
+            <div class="letter-inner">
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+              <div class="letter-seal" id="letterSeal"></div>
+              <span class="lt">Gracias</span>
+              <span class="ls">por acompañarnos</span>
+              <p class="ltx">Tu presencia es el regalo más lindo de esta noche. Si quieres dejar un detalle, habrá lluvia de sobres en la recepción.</p>
+              <svg class="ldiv" viewBox="0 0 120 10" fill="none" stroke="currentColor" stroke-width=".8" aria-hidden="true"><path d="M8 5h38M74 5h38"/><path d="M60 9S52 5.5 52 3.2A2.4 2.4 0 0156 1.6L60 4l4-2.4a2.4 2.4 0 014 1.6C68 5.5 60 9 60 9z" fill="currentColor" fill-opacity=".3"/></svg>
+              <span class="lsig">Kishany</span>
+            </div>
+          </div>
+          <div class="env-back"></div>
+          <div class="env-front"></div>
+          <div class="flap"></div>
+          <div class="wax">KF</div>
+        </div>
+      </button>
+      <p class="env-hint" id="envHint">Toca el sobre para abrirlo</p>
+    </section>
+
+    <section id="ubicacion">
+      <p class="eyebrow rv">Ubicación</p>
+      <h2 class="rv">Dónde <em>nos vemos</em></h2>
+      <div class="card venue framed rv">
+        <span class="v1" id="locVenue"></span>
+        <span class="v2" id="locRoom"></span>
+        <span class="v3" id="locAddress"></span>
+        <div class="map-frame" id="mapFrame" hidden></div>
+        <div class="btn-row">
+          <a class="btn full gold" id="mapsBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Cómo llegar</a>
+          <a class="btn soft" id="wazeBtn" target="_blank" rel="noopener">Waze</a>
+          <button class="btn soft" type="button" id="copyAddr">Copiar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="playlist">
+      <div class="brand-badge rv" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.62.62 0 01-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 11-.28-1.22c3.81-.87 7.08-.5 9.72 1.11.3.18.39.57.21.86zm1.23-2.74a.78.78 0 01-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 11-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.37.23.48.71.25 1.07zm.11-2.86c-3.23-1.92-8.55-2.1-11.63-1.16a.93.93 0 11-.54-1.79c3.54-1.07 9.41-.86 13.12 1.35a.93.93 0 11-.95 1.6z"/></svg>
+      </div>
+      <p class="eyebrow rv">Playlist colaborativa</p>
+      <h2 class="rv">Ayúdanos a crear la <em>banda sonora</em> de esta noche</h2>
+      <p class="lead rv">«¿Qué canción no puede faltar en nuestra celebración? Comparte tu favorita y ayúdanos a crear una playlist inolvidable».</p>
+      <form class="card framed rv" id="songForm" novalidate>
+        <div class="field">
+          <label for="song-title">Canción y artista</label>
+          <input type="text" id="song-title" maxlength="120" placeholder="Ej. Vivir mi vida — Marc Anthony" autocomplete="off">
+          <div class="err" id="err-song" role="alert"></div>
+        </div>
+        <div class="field">
+          <label for="song-link">Enlace <span class="opt">(opcional · Spotify o YouTube)</span></label>
+          <input type="url" id="song-link" maxlength="300" placeholder="https://open.spotify.com/track/…" inputmode="url" autocomplete="off">
+          <div class="err" id="err-link" role="alert"></div>
+        </div>
+        <div class="field">
+          <label for="song-name">Tu nombre <span class="opt">(opcional)</span></label>
+          <input type="text" id="song-name" maxlength="60" placeholder="Para saber quién la pidió" autocomplete="given-name">
+        </div>
+        <div class="hp" aria-hidden="true"><label for="song-web">No llenar</label><input type="text" id="song-web" tabindex="-1" autocomplete="off"></div>
+        <button class="btn" type="submit" id="songSubmit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>Agregar mi canción</button>
+        <p class="form-msg" id="songMsg" role="status"></p>
+      </form>
+      <div class="card song-list rv" id="songList" hidden>
+        <h3>Ya suenan en nuestra playlist</h3>
+        <ul id="songItems"></ul>
+      </div>
+      <a class="btn spotify rv" id="spotifyBtn" target="_blank" rel="noopener" hidden>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.62.62 0 01-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 11-.28-1.22c3.81-.87 7.08-.5 9.72 1.11.3.18.39.57.21.86zm1.23-2.74a.78.78 0 01-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 11-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.37.23.48.71.25 1.07zm.11-2.86c-3.23-1.92-8.55-2.1-11.63-1.16a.93.93 0 11-.54-1.79c3.54-1.07 9.41-.86 13.12 1.35a.93.93 0 11-.95 1.6z"/></svg>
+        Abrir la playlist en Spotify</a>
+    </section>
+
+    <section id="rsvp">
+      <div class="seal-slot small rv" id="rsvpSeal" aria-hidden="true"></div>
+      <p class="eyebrow rv">Confirmación</p>
+      <h2 class="rv">¿Nos acompañas en esta <em>noche especial</em>?</h2>
+      <p class="lead rv" id="rsvpDeadline" style="font-size:17px"></p>
+      <form class="card framed rv" id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="rsvp-name">Nombre completo</label>
+          <input type="text" id="rsvp-name" maxlength="80" placeholder="Nombre y apellido" autocomplete="name">
+          <div class="err" id="err-name" role="alert"></div>
+        </div>
+        <div class="field">
+          <span class="lbl" id="attendLbl">¿Asistirás?</span>
+          <div class="choice" role="radiogroup" aria-labelledby="attendLbl">
+            <input type="radio" name="attend" id="rsvp-yes" value="si"><label for="rsvp-yes"><span class="ic">♡</span>Sí, allí estaré</label>
+            <input type="radio" name="attend" id="rsvp-no" value="no"><label for="rsvp-no"><span class="ic">✉</span>Lo siento, no podré asistir</label>
+          </div>
+          <div class="err" id="err-attend" role="alert"></div>
+        </div>
+        <div class="field" id="guestsWrap" hidden>
+          <span class="lbl" id="guestsLbl">Acompañantes</span>
+          <div class="stepper" role="group" aria-labelledby="guestsLbl">
+            <button type="button" id="guestsMinus" aria-label="Quitar acompañante">−</button>
+            <output id="guestsOut" aria-live="polite">0</output>
+            <button type="button" id="guestsPlus" aria-label="Agregar acompañante">+</button>
+          </div>
+          <p class="hint" id="guestsHint"></p>
+          <div id="guestNamesWrap" hidden style="margin-top:12px">
+            <label for="rsvp-guestnames">Nombres de tus acompañantes</label>
+            <input type="text" id="rsvp-guestnames" maxlength="160" placeholder="Separados por coma">
+            <div class="err" id="err-guestnames" role="alert"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rsvp-phone">Celular / WhatsApp <span class="opt">(opcional)</span></label>
+          <input type="tel" id="rsvp-phone" maxlength="20" placeholder="300 123 4567" autocomplete="tel" inputmode="tel">
+          <div class="err" id="err-phone" role="alert"></div>
+        </div>
+        <div class="field" id="dietWrap" hidden>
+          <label for="rsvp-diet">Alergias o restricción alimentaria <span class="opt">(opcional)</span></label>
+          <input type="text" id="rsvp-diet" maxlength="120" placeholder="Ej. vegetariano, sin mariscos">
+        </div>
+        <div class="field">
+          <label for="rsvp-msg">Un mensaje para Kishany <span class="opt">(opcional)</span></label>
+          <textarea id="rsvp-msg" maxlength="400" placeholder="Unas palabras con mucho cariño…"></textarea>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="rsvp-web">No llenar</label><input type="text" id="rsvp-web" tabindex="-1" autocomplete="off"></div>
+        <button class="btn" type="submit" id="rsvpSubmit">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21S3 15.5 3 9a5 5 0 019-3 5 5 0 019 3c0 6.5-9 12-9 12z"/></svg>Confirmar asistencia</button>
+        <p class="form-msg" id="rsvpMsg" role="status"></p>
+      </form>
+      <div class="card done" id="rsvpDone" hidden>
+        <svg class="big-heart" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 28S3 20 3 11a7 7 0 0113-3 7 7 0 0113 3c0 9-13 17-13 17z"/></svg>
+        <p class="script" id="doneTitle"></p>
+        <p class="lead" id="doneText" style="font-size:17px"></p>
+        <pre id="donePreview" hidden></pre>
+        <div class="stack">
+          <a class="btn" id="waBtn" target="_blank" rel="noopener" hidden>Enviar por WhatsApp</a>
+          <a class="btn gold" id="doneCal" target="_blank" rel="noopener" hidden>Agregar a mi calendario</a>
+          <button class="btn soft" type="button" id="editBtn">Cambiar mi respuesta</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <div id="monoSlot" class="seal-slot rv" aria-label="Monograma KF"></div>
+      <p class="thanks rv">«Gracias por ser parte de este nuevo capítulo».</p>
+      <p class="script rv" style="font-size:clamp(20px,5.6vw,25px);margin:0;color:var(--rosa-hondo)">Con todo mi amor, Kishany</p>
+      <a class="btn soft rv" id="shareBtn" target="_blank" rel="noopener" style="margin-top:14px">Compartir invitación</a>
+      <div class="credits card framed rv">
+        <span class="c1">Dirección creativa y desarrollo digital</span>
+        <span class="c2" id="credName">YOSIMAR ZUÑIGA</span>
+        <span class="c3" id="agencySlot">LA MOVIE AGENCY S.A.S.</span>
+        <span class="c4" id="credTag">Creative Direction · Digital Experience · Web Development</span>
+        <a class="btn ig" id="igBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>
+          <span id="igLbl">Conoce nuestro trabajo</span>
+        </a>
+      </div>
+      <div class="bottom-pad"></div>
+    </section>
+  </main>
+
+  <div class="garden-seal" id="gardenSeal" aria-hidden="true"></div>
+
+  <div id="music" aria-label="Controles de sonido">
+    <button type="button" id="musicToggle" aria-label="Pausar música" aria-pressed="true"><span class="eq"><i></i><i></i><i></i><i></i></span></button>
+    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.6" aria-label="Volumen de la música">
+    <button type="button" id="sfxToggle" aria-label="Silenciar efectos de sonido" aria-pressed="true">
+      <svg class="ic-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 9.5a3.5 3.5 0 010 5"/></svg>
+      <svg class="ic-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" hidden><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 10l4 4M21 10l-4 4"/></svg>
+    </button>
+    <button type="button" id="volToggle" aria-label="Mostrar volumen" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="11" cy="17" r="2" fill="currentColor" stroke="none"/></svg>
+    </button>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+<p class="stage-note">Hecha con amor para verse en tu teléfono</p>
+</div>
+<!-- @@BODY_END -->
+
+<!-- Librerías alojadas en el proyecto: la web funciona sin depender de internet -->
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<!-- Configuración editable -->
+<script src="config/event.config.js"></script>
+<script src="config/assets.config.js"></script>
+<script src="config/branding.config.js"></script>
+<script src="config/music.config.js"></script>
+<script src="config/sound.config.js"></script>
+<script src="config/animation.config.js"></script>
+<!-- Aplicación -->
+<script src="src/js/utils.js"></script>
+<script src="src/js/assetLoader.js"></script>
+<script src="src/js/textures.js"></script>
+<script src="src/js/audioManager.js"></script>
+<script src="src/js/sfx.js"></script>
+<script src="src/js/scene3d.js"></script>
+<script src="src/js/intro.js"></script>
+<script src="src/js/sections.js"></script>
+<script src="src/js/forms.js"></script>
+<script src="src/js/main.js"></script>
+</body>
+</html>

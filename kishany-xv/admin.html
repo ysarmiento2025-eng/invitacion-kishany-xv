@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Confirmaciones · XV Kishany</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/branding/favicon_k.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--rosa:#D9AEB7;--rosa-claro:#F5E6E8;--oro:#C6A46B;--oro-h:#A07D43;--vino:#672F45;--ink:#5C2B3D;--mute:#A07C86;--card:#fffdfb;--line:rgba(198,164,107,.4);color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#F7EEF0;color:var(--ink);font:400 15px/1.5 "Jost",system-ui,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 60px}
+.wrap{max-width:900px;margin:0 auto}
+h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:30px;margin:0 0 4px;color:var(--vino)}
+.sub{color:var(--mute);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(185,118,133,.12)}
+.login{max-width:380px;margin:60px auto;display:flex;flex-direction:column;gap:14px}
+label{font:500 10px/1 "Jost",sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--oro-h);display:block;margin-bottom:8px}
+input{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(185,118,133,.35);font:400 16px "Jost",sans-serif;color:var(--ink);background:#fff}
+input:focus{outline:none;border-color:var(--rosa);box-shadow:0 0 0 4px rgba(217,174,183,.3)}
+button{min-height:46px;padding:0 20px;border:0;border-radius:999px;background:linear-gradient(180deg,#d29aa7,#b06d7e);color:#fff;font:500 11.5px "Jost",sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+button.soft{background:#fff;color:var(--vino);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:20px}
+.stat{text-align:center;padding:16px 10px}
+.stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:34px;color:var(--vino);font-variant-numeric:tabular-nums}
+.stat span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.bar input{flex:1;min-width:180px}
+h2{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px;margin:28px 0 12px;color:var(--vino)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px}
+th{text-align:left;font:500 9.5px "Jost",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 8px;border-bottom:1px solid rgba(185,118,133,.14);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;letter-spacing:.08em;white-space:nowrap}
+.yes{background:#e6f0e4;color:#3d5c3f}.no{background:#f7e3e7;color:#8c4257}
+.msg{color:var(--mute);font-size:13px;max-width:28ch}
+.empty{color:var(--mute);padding:24px 0;text-align:center}
+.err{color:#b23b57;font-size:13.5px}
+a{color:var(--oro-h)}
+@media(max-width:560px){.stat b{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form class="card login" id="login">
+    <div>
+      <h1 style="margin-bottom:12px">Panel de confirmaciones</h1>
+      <label for="pwd">Contraseña de organizadores</label>
+      <input type="password" id="pwd" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <button type="submit">Entrar</button>
+    <p class="err" id="loginErr"></p>
+  </form>
+
+  <div id="panel" hidden>
+    <h1>XV de Kishany Florez</h1>
+    <p class="sub">Confirmaciones y canciones</p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="bar">
+      <input type="search" id="q" placeholder="Buscar por nombre…" aria-label="Buscar invitado">
+      <button type="button" class="soft" id="csvRsvp">Descargar confirmaciones</button>
+      <button type="button" class="soft" id="csvSongs">Descargar canciones</button>
+      <button type="button" class="soft" id="reload">Actualizar</button>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Invitados</h2>
+      <div class="scroll"><table id="tRsvp"><thead><tr>
+        <th>Nombre</th><th>Asiste</th><th>Acompañantes</th><th>Celular</th><th>Alimentación</th><th>Mensaje</th><th>Fecha</th>
+      </tr><tbody></tbody></table></div>
+      <p class="empty" id="emptyRsvp" hidden>Aún no hay confirmaciones.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h2 style="margin-top:0">Canciones pedidas</h2>
+      <div class="scroll"><table id="tSongs"><thead><tr>
+        <th>Canción</th><th>Votos</th><th>De</th><th>Enlace</th><th>Fecha</th>
+      </tr><tbody></tbody></table></div>
+      <p class="empty" id="emptySongs" hidden>Aún no hay canciones.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+let KEY = sessionStorage.getItem("kxv-admin") || "", DATA = { rsvps: [], songs: [] };
+const fmt = s => s ? new Intl.DateTimeFormat("es-CO", { dateStyle: "medium", timeStyle: "short", timeZone: "America/Bogota" }).format(new Date(s)) : "";
+const esc = t => String(t ?? "");
+
+async function load() {
+  const res = await fetch("/api/admin", { headers: { "x-admin-key": KEY } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || "No pudimos cargar los datos.");
+  DATA = { rsvps: data.rsvps || [], songs: data.songs || [] };
+  render();
+}
+
+function render() {
+  const q = ($("#q").value || "").toLowerCase().trim();
+  const rs = DATA.rsvps.filter(r => !q || (r.name || "").toLowerCase().includes(q));
+  const si = rs.filter(r => r.attending);
+  const personas = si.length + si.reduce((a, r) => a + (r.companions || 0), 0);
+  $("#stats").replaceChildren(...[
+    ["Personas en total", personas], ["Confirmados", si.length],
+    ["Acompañantes", personas - si.length], ["No asisten", rs.length - si.length], ["Canciones", DATA.songs.length],
+  ].map(([k, v]) => { const d = document.createElement("div"); d.className = "card stat"; d.innerHTML = `<b>${v}</b><span>${k}</span>`; return d; }));
+
+  const tb = $("#tRsvp tbody"); tb.replaceChildren();
+  rs.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><strong>${esc(r.name)}</strong></td>
+      <td><span class="pill ${r.attending ? "yes" : "no"}">${r.attending ? "Sí" : "No"}</span></td>
+      <td>${r.attending ? (r.companions || 0) + (r.companion_names ? `<div class="msg">${esc(r.companion_names)}</div>` : "") : "—"}</td>
+      <td>${esc(r.phone) || "—"}</td><td>${esc(r.diet) || "—"}</td>
+      <td class="msg">${esc(r.message) || "—"}</td><td>${fmt(r.updated_at || r.created_at)}</td>`;
+    tb.appendChild(tr);
+  });
+  $("#emptyRsvp").hidden = rs.length > 0;
+
+  const ts = $("#tSongs tbody"); ts.replaceChildren();
+  DATA.songs.forEach(s => {
+    const tr = document.createElement("tr");
+    const link = s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">Abrir</a>` : "—";
+    tr.innerHTML = `<td>${esc(s.song)}</td><td>${s.votes || 1}</td><td>${esc(s.guest_name) || "—"}</td><td>${link}</td><td>${fmt(s.created_at)}</td>`;
+    ts.appendChild(tr);
+  });
+  $("#emptySongs").hidden = DATA.songs.length > 0;
+}
+
+function csv(rows, name) {
+  const q = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const text = "﻿" + rows.map(r => r.map(q).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+  a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+$("#login").addEventListener("submit", async e => {
+  e.preventDefault(); KEY = $("#pwd").value; $("#loginErr").textContent = "";
+  try { await load(); sessionStorage.setItem("kxv-admin", KEY); $("#login").hidden = true; $("#panel").hidden = false; }
+  catch (err) { $("#loginErr").textContent = err.message; }
+});
+$("#q").addEventListener("input", render);
+$("#reload").addEventListener("click", () => load().catch(e => alert(e.message)));
+$("#csvRsvp").addEventListener("click", () => csv([["Nombre", "Asiste", "Acompañantes", "Nombres", "Celular", "Alimentación", "Mensaje", "Fecha"],
+  ...DATA.rsvps.map(r => [r.name, r.attending ? "Sí" : "No", r.companions, r.companion_names, r.phone, r.diet, r.message, fmt(r.updated_at || r.created_at)])], "confirmaciones-kishany.csv"));
+$("#csvSongs").addEventListener("click", () => csv([["Canción", "Votos", "De", "Enlace", "Fecha"],
+  ...DATA.songs.map(s => [s.song, s.votes, s.guest_name, s.link, fmt(s.created_at)])], "canciones-kishany.csv"));
+
+if (KEY) load().then(() => { $("#login").hidden = true; $("#panel").hidden = false; }).catch(() => sessionStorage.removeItem("kxv-admin"));
+</script>
+</body>
+</html>
