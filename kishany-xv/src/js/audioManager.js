@@ -8,10 +8,21 @@ const AudioManager = {
     $("#vol").value = this.vol;
     if (CONFIG.music.src) this.prepare();                       // el archivo se va descargando mientras se ve la portada
     if (CONFIG.sound) CONFIG.sound.channels.music.volume = this.vol;
-    $("#musicToggle").addEventListener("click", () => this.playing ? this.pause() : this.play());
+    $("#musicToggle").addEventListener("click", () => this.playing ? this.pause(true) : (this._manualPause = false, this.play()));
     $("#volToggle").addEventListener("click", () => { const x = $("#music").classList.toggle("expanded"); $("#volToggle").setAttribute("aria-expanded", x); });
     $("#vol").addEventListener("input", e => this.setVol(+e.target.value));
+    this.autoStart();
     document.addEventListener("visibilitychange", () => { if (document.hidden && this.playing) { this._resume = true; this.pause(); } else if (!document.hidden && this._resume) { this._resume = false; this.play(); } });
+  },
+  // La música arranca apenas la persona entra al enlace. Si el navegador lo permite, suena al cargar;
+  // si no (política de autoplay), arranca en el PRIMER gesto en cualquier parte de la pantalla.
+  autoStart() {
+    const evs = ["pointerup", "touchend", "click", "keydown", "wheel"];
+    const go = () => { if (this.playing || this._manualPause) return; this.play(); };
+    const off = () => evs.forEach(e => window.removeEventListener(e, onGesture, true));
+    const onGesture = () => { go(); if (this.playing) off(); else setTimeout(() => { if (this.playing) off(); }, 600); };
+    evs.forEach(e => window.addEventListener(e, onGesture, true));
+    this.play();
   },
   ensureCtx() {
     if (this.ctx) return this.ctx;
@@ -73,7 +84,8 @@ const AudioManager = {
     await ctx.resume(); if (!this.timer) { this.schedule(); this.timer = setInterval(() => this.schedule(), 6000); }
     this.playing = true; this.ui();
   },
-  pause() {
+  pause(manual) {
+    if (manual === true) this._manualPause = true;
     if (this.mode === "file" && this.el) this.el.pause();
     if (this.ctx) this.ctx.suspend();
     clearInterval(this.timer); this.timer = null; this.playing = false; this.ui();
