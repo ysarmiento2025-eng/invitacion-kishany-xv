@@ -9,7 +9,7 @@ window.CONFIG = window.CONFIG || {};
 
 CONFIG.sound = {
   channels: {
-    music:   { volume: 0.6, enabled: true },
+    music:   { volume: 0.9, enabled: true },
     effects: { volume: 0.5, enabled: true },
   },
   minGapMs: 220,          // evita que dos efectos suenen encimados

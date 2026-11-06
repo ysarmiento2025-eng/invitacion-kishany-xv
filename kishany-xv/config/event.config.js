@@ -13,16 +13,16 @@ CONFIG.event = {
   timeZone: "America/Bogota",
   durationHours: 6,                         // duración para el calendario y el mensaje final del contador
 
-  venue: "Centro de Convenciones Las Américas",
+  venue: "Centro de Convenciones de las Américas",
   room: "Salón Nueva Granada",
   address: "Anillo Vial, sector Cielo Mar",
-  city: "Cartagena de Indias, Bolívar",
+  city: "Cartagena de Indias",
 
-  parents: ["Tatiana Pastrana", "Kevin Flórez"],
+  parents: ["Kevin Flórez", "Tatiana Pastrana"],
 
   // Texto que usan Google Maps, Waze y el calendario para encontrar el lugar.
   // Si el cliente entrega un enlace oficial de Google Maps, pégalo en mapsUrl y tendrá prioridad.
-  mapsQuery: "Centro de Convenciones Las Américas, Anillo Vial, Cielo Mar, Cartagena, Colombia",
+  mapsQuery: "Centro de Convenciones de las Américas, Anillo Vial, Cielo Mar, Cartagena, Colombia",
   mapsUrl: "",
 
   // Enlace opcional a la playlist colaborativa de Spotify (se muestra como botón extra).
@@ -32,7 +32,8 @@ CONFIG.event = {
 };
 
 CONFIG.rsvp = {
-  maxCompanions: 2,                         // límite de acompañantes por invitado
+  // Los cupos (1 a 4 por invitado) los asigna quien envía la invitación y se comunican en el mensaje;
+  // el formulario ya no pregunta por acompañantes ni celular.
 
   // CONFIRMACIÓN POR WHATSAPP (se usa si la base de datos no está configurada o falla).
   //
@@ -46,8 +47,8 @@ CONFIG.rsvp = {
   // Si tienes un enlace de wa.me/message/XXXX (enlace corto de WhatsApp Business), ese sí sirve.
   whatsappLink: "https://wa.me/Kishanys15thBirthday",
 
-  // Texto que se envía por WhatsApp. {nombre}, {asistencia}, {personas} y {mensaje} se reemplazan solos.
-  whatsappText: "Hola! Confirmo mi asistencia a los 15 años de Kishany Florez.\nNombre: {nombre}\nAsistiremos: {personas} personas{mensaje}",
+  // Texto que se envía por WhatsApp. {nombre}, {asistencia} y {mensaje} se reemplazan solos.
+  whatsappText: "Hola! Respondo a la invitación a los 15 años de Kishany Florez.\nNombre: {nombre}\nAsistencia: {asistencia}{mensaje}",
 
   apiBase: "/api",                          // rutas de Vercel: /api/rsvp y /api/songs
 };

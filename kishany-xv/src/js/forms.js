@@ -26,52 +26,34 @@ function waLink(text) {
 }
 
 const RSVP = {
-  guests: 0,
   init() {
     this.shownAt = Date.now();
-    const max = CONFIG.rsvp.maxCompanions;
-    $("#guestsHint").textContent = max ? `Puedes venir con hasta ${max} acompañante${max > 1 ? "s" : ""}.` : "Esta invitación es personal.";
-    $("#guestsMinus").addEventListener("click", () => this.setGuests(this.guests - 1));
-    $("#guestsPlus").addEventListener("click", () => this.setGuests(this.guests + 1));
     document.querySelectorAll("input[name=attend]").forEach(r => r.addEventListener("change", () => {
-      const yes = $("#rsvp-yes").checked; $("#guestsWrap").hidden = !yes || !max; $("#dietWrap").hidden = !yes; setErr("attend", "");
+      $("#dietWrap").hidden = !$("#rsvp-yes").checked; setErr("attend", "");
     }));
     $("#rsvp-name").addEventListener("input", e => setErr("name", "", e.target));
-    $("#rsvp-phone").addEventListener("input", e => setErr("phone", "", e.target));
-    $("#rsvp-guestnames").addEventListener("input", e => setErr("guestnames", "", e.target));
     $("#rsvpForm").addEventListener("submit", e => { e.preventDefault(); this.submit(); });
     $("#editBtn").addEventListener("click", () => { $("#rsvpDone").hidden = true; $("#rsvpForm").hidden = false; $("#rsvp-name").focus(); });
-    this.setGuests(0);
     this.prefill();
-  },
-  setGuests(n) {
-    const max = CONFIG.rsvp.maxCompanions; this.guests = Math.max(0, Math.min(max, n));
-    $("#guestsOut").textContent = this.guests; $("#guestsMinus").disabled = this.guests === 0; $("#guestsPlus").disabled = this.guests === max;
-    $("#guestNamesWrap").hidden = this.guests === 0;
   },
   prefill() { // si ya respondió desde este teléfono, recupera sus datos para editarlos
     let prev = null; try { prev = JSON.parse(store.get("kxv-rsvp")); } catch (e) {}
     if (!prev) return;
-    $("#rsvp-name").value = prev.name || ""; $("#rsvp-phone").value = prev.phone || ""; $("#rsvp-msg").value = prev.message || "";
-    $("#rsvp-diet").value = prev.diet || ""; $("#rsvp-guestnames").value = prev.companionNames || "";
+    $("#rsvp-name").value = prev.name || ""; $("#rsvp-msg").value = prev.message || ""; $("#rsvp-diet").value = prev.diet || "";
     const r = $(prev.attending ? "#rsvp-yes" : "#rsvp-no"); r.checked = true; r.dispatchEvent(new Event("change"));
-    this.setGuests(prev.companions || 0);
   },
   validate() {
     const nameEl = $("#rsvp-name"), name = nameEl.value.trim().replace(/\s+/g, " ");
     const attend = (document.querySelector("input[name=attend]:checked") || {}).value;
-    const phoneEl = $("#rsvp-phone"), phone = phoneEl.value.replace(/[^\d+]/g, "");
-    const gnEl = $("#rsvp-guestnames"), companionNames = gnEl.value.trim();
     let ok = true, first = null;
     const fail = (id, msg, el) => { setErr(id, msg, el); ok = false; first = first || el || $("#rsvp-yes"); };
     if (name.length < 5 || name.split(" ").length < 2) fail("name", "Escribe tu nombre y apellido.", nameEl); else setErr("name", "", nameEl);
     if (!attend) fail("attend", "Cuéntanos si nos acompañas."); else setErr("attend", "");
-    if (phone && (phone.replace(/\D/g, "").length < 7 || phone.replace(/\D/g, "").length > 15)) fail("phone", "Revisa el número; debe tener entre 7 y 15 dígitos.", phoneEl); else setErr("phone", "", phoneEl);
-    if (attend === "si" && this.guests > 0 && companionNames.length < 3) fail("guestnames", "Escribe el nombre de tus acompañantes.", gnEl); else setErr("guestnames", "", gnEl);
     if (first) first.focus();
+    // Los cupos los asigna el organizador; el invitado no elige acompañantes ni deja celular.
     return ok ? {
-      name, attending: attend === "si", companions: attend === "si" ? this.guests : 0, companionNames: attend === "si" && this.guests ? companionNames : "",
-      phone, diet: attend === "si" ? $("#rsvp-diet").value.trim() : "", message: $("#rsvp-msg").value.trim(),
+      name, attending: attend === "si", companions: 0, companionNames: "", phone: "",
+      diet: attend === "si" ? $("#rsvp-diet").value.trim() : "", message: $("#rsvp-msg").value.trim(),
     } : null;
   },
   async submit() {
@@ -88,24 +70,20 @@ const RSVP = {
     store.set("kxv-rsvp", JSON.stringify(data)); this.done(data, "whatsapp");
   },
   text(d) {
-    const personas = d.attending ? d.companions + 1 : 0;
+    const asistencia = d.attending ? "Sí, allí estaré" : "No podré asistir";
     const plantilla = CONFIG.rsvp.whatsappText;
     if (plantilla) {                                   // plantilla configurable
       return plantilla
         .replace("{nombre}", d.name)
-        .replace("{asistencia}", d.attending ? "Sí, allí estaré" : "No podré asistir")
-        .replace("{personas}", personas)
+        .replace("{asistencia}", asistencia)
         .replace("{mensaje}", d.message ? `\nMensaje: ${d.message}` : "")
-        + (d.attending && d.companionNames ? `\nAcompañantes: ${d.companionNames}` : "")
-        + (d.phone ? `\nCelular: ${d.phone}` : "")
         + (d.attending && d.diet ? `\nAlimentación: ${d.diet}` : "")
         + (d.attending ? "" : "\n(Lamento no poder acompañarlos)");
     }
     const when = new Intl.DateTimeFormat("es-CO", { dateStyle: "medium", timeStyle: "short", timeZone: CONFIG.event.timeZone }).format(new Date());
     return [`✨ Confirmación · XV de ${CONFIG.event.honoree}`, `Nombre: ${d.name}`,
       `Asistencia: ${d.attending ? "Sí, allí estaré ♡" : "Lo siento, no podré asistir"}`,
-      d.attending ? `Acompañantes: ${d.companions}${d.companionNames ? " (" + d.companionNames + ")" : ""}` : null,
-      d.phone ? `Celular: ${d.phone}` : null, d.diet ? `Alimentación: ${d.diet}` : null, d.message ? `Mensaje: ${d.message}` : null,
+      d.diet ? `Alimentación: ${d.diet}` : null, d.message ? `Mensaje: ${d.message}` : null,
       `Registrado: ${when}`].filter(Boolean).join("\n");
   },
   done(d, mode) {

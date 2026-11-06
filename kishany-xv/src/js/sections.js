@@ -12,14 +12,12 @@ const EventInfo = {
     const time = this.fmt({ hour: "numeric", minute: "2-digit", hour12: true }).replace(/\s/g, " ");
     this.dateText = date; this.timeText = time;
 
-    $("#heroDate").textContent = this.fmt({ day: "numeric", month: "long", year: "numeric" }) + " · Cartagena";
     $("#evDate").textContent = date; $("#evTime").textContent = time;
-    $("#evRoom").textContent = E.room.replace(/^Salón\s+/i, "");
-    $("#evVenue").innerHTML = ""; const v = document.createElement("span"); v.textContent = E.venue; const sm = document.createElement("small"); sm.textContent = E.city; $("#evVenue").append(v, sm);
+    $("#evRoom").textContent = E.room;
     E.parents.forEach(n => { const s = document.createElement("span"); s.textContent = n; $("#evParents").appendChild(s); });
 
-    // Ubicación
-    $("#locVenue").textContent = E.venue; $("#locRoom").textContent = E.room; $("#locAddress").textContent = `${E.address} · ${E.city}`;
+    // Recinto, dirección y mapa (dentro de la información del evento, sin duplicar el salón)
+    $("#locVenue").textContent = E.venue; $("#locAddress").textContent = `${E.address} · ${E.city}`;
     $("#mapsBtn").href = this.mapsUrl();
     $("#wazeBtn").href = "https://waze.com/ul?q=" + encodeURIComponent(E.mapsQuery) + "&navigate=yes";
     $("#copyAddr").addEventListener("click", () => copyText(this.fullAddress()));

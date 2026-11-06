@@ -4,8 +4,9 @@ const AudioManager = {
   vol: (CONFIG.sound && CONFIG.sound.channels.music.volume) ?? CONFIG.music.volume, timer: null, chordIdx: 0,
 
   init() {
-    const saved = parseFloat(store.get("kxv-vol")); if (!isNaN(saved)) this.vol = saved;
+    const saved = parseFloat(store.get("kxv-vol2")); if (!isNaN(saved)) this.vol = saved;
     $("#vol").value = this.vol;
+    if (CONFIG.music.src) this.prepare();                       // el archivo se va descargando mientras se ve la portada
     if (CONFIG.sound) CONFIG.sound.channels.music.volume = this.vol;
     $("#musicToggle").addEventListener("click", () => this.playing ? this.pause() : this.play());
     $("#volToggle").addEventListener("click", () => { const x = $("#music").classList.toggle("expanded"); $("#volToggle").setAttribute("aria-expanded", x); });
@@ -39,15 +40,34 @@ const AudioManager = {
     const pent = [76, 79, 81, 84, 86, 88];
     for (let k = 0; k < 4; k++) if (Math.random() < .7) this.note(this.hz(pent[(Math.random() * pent.length) | 0]), t + .8 + k * 1.4 + Math.random() * .4, 2.6, "sine", .03, .02);
   },
+  // Elemento <audio> único: nunca se recrea ni se reinicia al cambiar de sección.
+  prepare() {
+    if (this.el) return this.el;
+    const el = this.el = new Audio(); el.src = CONFIG.music.src; el.loop = true; el.preload = "auto"; el.setAttribute("playsinline", "");
+    el.addEventListener("ended", () => { if (this.playing) { el.currentTime = 0; el.play().catch(() => {}); } });   // respaldo del bucle
+    el.addEventListener("error", () => { if (this.mode === "file") { this.mode = "synth"; console.warn("[música] archivo no disponible, se usa ambiente"); if (this.playing) this.play(); } });
+    return el;
+  },
+  // Reproduce el archivo a través de Web Audio: así el volumen funciona también en iPhone
+  // (Safari ignora audio.volume) y la música entra con un fundido suave.
+  async playFile() {
+    const el = this.prepare(), ctx = this.ensureCtx();
+    if (ctx) {
+      if (ctx.state !== "running") ctx.resume();
+      if (!this.fgain) { try { const src = ctx.createMediaElementSource(el); this.fgain = ctx.createGain(); src.connect(this.fgain); this.fgain.connect(ctx.destination); } catch (e) { this.fgain = null; } }
+    }
+    this.mode = "file";
+    if (this.fgain) { el.volume = 1; const t = ctx.currentTime; this.fgain.gain.cancelScheduledValues(t); this.fgain.gain.setValueAtTime(0, t); this.fgain.gain.linearRampToValueAtTime(this.vol, t + 1.4); }
+    else el.volume = this.vol;
+    await el.play(); this.playing = true; this.ui();
+  },
   async play() {
     if (CONFIG.music.src && this.mode !== "synth") {
-      try {
-        if (!this.el) {
-          this.el = new Audio(CONFIG.music.src); this.el.loop = true; this.el.preload = "auto";
-          this.el.addEventListener("error", () => { if (this.mode === "file") { this.mode = "synth"; console.warn("[música] archivo no disponible, se usa ambiente"); if (this.playing) this.play(); } });
-        }
-        this.el.volume = this.vol; this.mode = "file"; await this.el.play(); this.playing = true; this.ui(); return;
-      } catch (e) { this.mode = "synth"; }
+      try { await this.playFile(); return; }
+      catch (e) {
+        if (e && e.name === "NotAllowedError") { this.playing = false; this.ui(); return; }   // el navegador pidió un toque: el botón queda en «reproducir»
+        this.mode = "synth";
+      }
     }
     this.mode = "synth"; const ctx = this.ensureCtx(); if (!ctx) { toast("Este navegador no permite reproducir audio."); return; }
     await ctx.resume(); if (!this.timer) { this.schedule(); this.timer = setInterval(() => this.schedule(), 6000); }
@@ -59,8 +79,8 @@ const AudioManager = {
     clearInterval(this.timer); this.timer = null; this.playing = false; this.ui();
   },
   setVol(v) {
-    this.vol = v; store.set("kxv-vol", v);
-    if (this.el) this.el.volume = v;
+    this.vol = v; store.set("kxv-vol2", v);
+    if (this.fgain) this.fgain.gain.setTargetAtTime(v, this.ctx.currentTime, .05); else if (this.el) this.el.volume = v;
     if (this.master) this.master.gain.setTargetAtTime(v * .5, this.ctx.currentTime, .1);
   },
   setVolChannel(v) { CONFIG.sound.channels.music.volume = v; this.setVol(v); },
